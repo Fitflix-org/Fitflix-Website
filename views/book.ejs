@@ -1,0 +1,264 @@
+<% layout('layout') %>
+
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold mb-3">Book Your Session</h1>
+    <p class="lead mb-0">Reserve your spot and take the next step in your fitness journey</p>
+  </div>
+</section>
+
+<!-- Booking Form -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="booking-form-container">
+          <form id="bookingForm" class="needs-validation" novalidate>
+            <!-- Personal Information -->
+            <div class="form-section mb-5">
+              <h3 class="fw-bold mb-4">Personal Information</h3>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="firstName" class="form-label fw-semibold">First Name</label>
+                  <input type="text" class="form-control" id="firstName" required>
+                  <div class="invalid-feedback">Please provide your first name.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="lastName" class="form-label fw-semibold">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" required>
+                  <div class="invalid-feedback">Please provide your last name.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label fw-semibold">Email Address</label>
+                  <input type="email" class="form-control" id="email" required>
+                  <div class="invalid-feedback">Please provide a valid email address.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="phone" class="form-label fw-semibold">Phone Number</label>
+                  <input type="tel" class="form-control" id="phone" required>
+                  <div class="invalid-feedback">Please provide your phone number.</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Booking Details -->
+            <div class="form-section mb-5">
+              <h3 class="fw-bold mb-4">Booking Details</h3>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="service" class="form-label fw-semibold">Service Type</label>
+                  <select class="form-select" id="service" required>
+                    <option value="">Select Service</option>
+                    <option value="personal-training">Personal Training</option>
+                    <option value="group-class">Group Class</option>
+                    <option value="gym-access">Gym Access</option>
+                    <option value="nutrition">Nutrition Consultation</option>
+                    <option value="yoga">Yoga Session</option>
+                    <option value="physiotherapy">Physiotherapy</option>
+                  </select>
+                  <div class="invalid-feedback">Please select a service type.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="location" class="form-label fw-semibold">Preferred Location</label>
+                  <select class="form-select" id="location" required>
+                    <option value="">Select Location</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="chennai">Chennai</option>
+                    <option value="hyderabad">Hyderabad</option>
+                    <option value="pune">Pune</option>
+                  </select>
+                  <div class="invalid-feedback">Please select a location.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="date" class="form-label fw-semibold">Preferred Date</label>
+                  <input type="date" class="form-control" id="date" required>
+                  <div class="invalid-feedback">Please select a date.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="time" class="form-label fw-semibold">Preferred Time</label>
+                  <select class="form-select" id="time" required>
+                    <option value="">Select Time</option>
+                    <option value="06:00">6:00 AM</option>
+                    <option value="07:00">7:00 AM</option>
+                    <option value="08:00">8:00 AM</option>
+                    <option value="09:00">9:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="13:00">1:00 PM</option>
+                    <option value="14:00">2:00 PM</option>
+                    <option value="15:00">3:00 PM</option>
+                    <option value="16:00">4:00 PM</option>
+                    <option value="17:00">5:00 PM</option>
+                    <option value="18:00">6:00 PM</option>
+                    <option value="19:00">7:00 PM</option>
+                    <option value="20:00">8:00 PM</option>
+                  </select>
+                  <div class="invalid-feedback">Please select a time.</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Fitness Goals -->
+            <div class="form-section mb-5">
+              <h3 class="fw-bold mb-4">Fitness Goals & Preferences</h3>
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="goals" class="form-label fw-semibold">Primary Fitness Goals</label>
+                  <div class="goal-options">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="weight-loss" value="weight-loss">
+                      <label class="form-check-label" for="weight-loss">Weight Loss</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="muscle-gain" value="muscle-gain">
+                      <label class="form-check-label" for="muscle-gain">Muscle Gain</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="strength" value="strength">
+                      <label class="form-check-label" for="strength">Strength Training</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="endurance" value="endurance">
+                      <label class="form-check-label" for="endurance">Endurance</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="flexibility" value="flexibility">
+                      <label class="form-check-label" for="flexibility">Flexibility</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="general-fitness" value="general-fitness">
+                      <label class="form-check-label" for="general-fitness">General Fitness</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="experience" class="form-label fw-semibold">Fitness Experience</label>
+                  <select class="form-select" id="experience">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="medical" class="form-label fw-semibold">Medical Conditions</label>
+                  <select class="form-select" id="medical">
+                    <option value="none">None</option>
+                    <option value="joint-issues">Joint Issues</option>
+                    <option value="heart-condition">Heart Condition</option>
+                    <option value="diabetes">Diabetes</option>
+                    <option value="other">Other (specify in notes)</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="notes" class="form-label fw-semibold">Additional Notes</label>
+                  <textarea class="form-control" id="notes" rows="3" placeholder="Any specific requirements, injuries, or additional information..."></textarea>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Emergency Contact -->
+            <div class="form-section mb-5">
+              <h3 class="fw-bold mb-4">Emergency Contact</h3>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="emergencyName" class="form-label fw-semibold">Contact Name</label>
+                  <input type="text" class="form-control" id="emergencyName" required>
+                  <div class="invalid-feedback">Please provide emergency contact name.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="emergencyPhone" class="form-label fw-semibold">Contact Phone</label>
+                  <input type="tel" class="form-control" id="emergencyPhone" required>
+                  <div class="invalid-feedback">Please provide emergency contact phone.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="emergencyRelation" class="form-label fw-semibold">Relationship</label>
+                  <input type="text" class="form-control" id="emergencyRelation" placeholder="e.g., Spouse, Parent, Friend" required>
+                  <div class="invalid-feedback">Please specify relationship.</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Terms & Conditions -->
+            <div class="form-section mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="terms" required>
+                <label class="form-check-label" for="terms">
+                  I agree to the <a href="#" class="text-primary">Terms & Conditions</a> and <a href="#" class="text-primary">Privacy Policy</a>
+                </label>
+                <div class="invalid-feedback">You must agree to the terms and conditions.</div>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="waiver">
+                <label class="form-check-label" for="waiver">
+                  I acknowledge that I understand the risks associated with fitness activities and waive any claims against FitFlix
+                </label>
+              </div>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                <i class="fas fa-calendar-check me-2"></i>Confirm Booking
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Booking Summary Sidebar -->
+      <div class="col-lg-4">
+        <div class="booking-summary sticky-top">
+          <h4 class="fw-bold mb-4">Booking Summary</h4>
+          
+          <div class="summary-item mb-3">
+            <div class="d-flex justify-content-between">
+              <span class="text-muted">Service:</span>
+              <span class="fw-semibold" id="summaryService">Not selected</span>
+            </div>
+          </div>
+          
+          <div class="summary-item mb-3">
+            <div class="d-flex justify-content-between">
+              <span class="text-muted">Location:</span>
+              <span class="fw-semibold" id="summaryLocation">Not selected</span>
+            </div>
+          </div>
+          
+          <div class="summary-item mb-3">
+            <div class="d-flex justify-content-between">
+              <span class="text-muted">Date:</span>
+              <span class="fw-semibold" id="summaryDate">Not selected</span>
+            </div>
+          </div>
+          
+          <div class="summary-item mb-3">
+            <div class="d-flex justify-content-between">
+              <span class="text-muted">Time:</span>
+              <span class="fw-semibold" id="summaryTime">Not selected</span>
+            </div>
+          </div>
+          
+          <hr>
+          
+          <div class="summary-total">
+            <div class="d-flex justify-content-between">
+              <span class="fw-bold">Total:</span>
+              <span class="fw-bold text-primary fs-5" id="summaryTotal">₹0</span>
+            </div>
+          </div>
+          
+          <!-- Contact Info -->
+          <div class="mt-4 p-3 bg-light rounded">
+            <h6 class="fw-bold mb-2">Need Help?</h6>
+            <p class="text-muted small mb-2">Call us at: <a href="tel:+919876543210" class="text-primary">+91 98765 43210</a></p>
+            <p class="text-muted small mb-0">Email: <a href="mailto:support@fitflix.com" class="text-primary">support@fitflix.com</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

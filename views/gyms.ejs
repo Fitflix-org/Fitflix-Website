@@ -1,0 +1,322 @@
+<% layout('layout') %>
+
+<!-- Page Header -->
+<section class="page-header text-white py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h1 class="display-4 fw-bold mb-3">Find Gyms in the City</h1>
+        <p class="lead mb-0">Discover premium fitness facilities near you</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            <i class="fas fa-map-marker-alt me-2"></i>
+            <%= selectedCity || 'All Cities' %>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/gyms">All Cities</a></li>
+            <% if (typeof cities !== 'undefined') { %>
+              <% cities.forEach(city => { %>
+                <li><a class="dropdown-item" href="/gyms?city=<%= city.name %>"><%= city.name %></a></li>
+              <% }) %>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gyms Grid -->
+<section class="py-5">
+  <div class="container">
+    <!-- Current City Gyms -->
+    <% if (gyms && gyms.length > 0) { %>
+      <div class="row g-4" id="currentCityGyms">
+        <% gyms.forEach((gym, index) => { %>
+          <div class="col-lg-4 col-md-6">
+            <div class="gym-card-modern d-flex flex-column" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+              <div class="gym-image-container">
+                <img src="<%= gym.image %>" alt="<%= gym.name %>" class="gym-image">
+                <div class="gym-badge">
+                  <i class="fas fa-star text-yellow"></i>
+                  <%= gym.rating %>
+                </div>
+              </div>
+              <div class="gym-content d-flex flex-column">
+                <h4 class="fw-bold mb-3"><%= gym.name %></h4>
+                
+                <!-- Location & Distance -->
+                <div class="gym-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span><%= gym.location %></span>
+                </div>
+                <div class="gym-distance">
+                  <i class="fas fa-route"></i>
+                  <span><%= gym.distance %> away</span>
+                </div>
+                
+                <!-- Rating -->
+                <div class="gym-rating">
+                  <div class="stars">
+                    <% for(let i = 1; i <= 5; i++) { %>
+                      <i class="fas fa-star <%= i <= gym.rating ? 'text-warning' : 'text-muted' %>"></i>
+                    <% } %>
+                  </div>
+                  <span class="fw-semibold"><%= gym.rating %>/5</span>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="gym-contact">
+                  <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:<%= gym.phone %>" class="text-decoration-none"><%= gym.phone %></a>
+                  </div>
+                  <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:<%= gym.email %>" class="text-decoration-none"><%= gym.email %></a>
+                  </div>
+                </div>
+                
+                <!-- Timings -->
+                <div class="gym-timings">
+                  <h6 class="fw-bold mb-2"><i class="fas fa-clock me-2"></i>Timings</h6>
+                  <div class="timing-item">
+                    <span>Mon-Fri:</span>
+                    <span class="ms-auto"><%= gym.timings.weekdays %></span>
+                  </div>
+                  <div class="timing-item">
+                    <span>Saturday:</span>
+                    <span class="ms-auto"><%= gym.timings.saturday %></span>
+                  </div>
+                  <div class="timing-item">
+                    <span>Sunday:</span>
+                    <span class="ms-auto"><%= gym.timings.sunday %></span>
+                  </div>
+                </div>
+                
+                <!-- Amenities -->
+                <div class="gym-amenities">
+                  <h6 class="fw-bold mb-2">Amenities</h6>
+                  <% gym.amenities.slice(0, 4).forEach(amenity => { %>
+                    <span class="amenity-tag"><%= amenity %></span>
+                  <% }) %>
+                  <% if (gym.amenities.length > 4) { %>
+                    <span class="amenity-tag">+<%= gym.amenities.length - 4 %> more</span>
+                  <% } %>
+                </div>
+                
+                <!-- Actions -->
+                <div class="gym-actions mt-auto">
+                  <div class="d-grid gap-2">
+                    <a href="/gym/<%= gym.id %>" class="btn btn-outline-primary">
+                      <i class="fas fa-eye me-2"></i>View Details
+                    </a>
+                    <button class="btn btn-red-gradient" onclick="openEnquiryModal('<%= gym.id %>', '<%= gym.name %>')">
+                      <i class="fas fa-phone me-2"></i>Enquire Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="text-center py-5">
+        <i class="fas fa-search fs-1 text-muted mb-3"></i>
+        <h3 class="text-muted">No gyms found in <%= selectedCity || 'selected city' %></h3>
+        <p class="text-muted">Try selecting a different city or check back later.</p>
+      </div>
+    <% } %>
+    
+    <!-- Show More Section -->
+    <% if (typeof allGyms !== 'undefined' && allGyms.length > gyms.length) { %>
+      <div class="text-center mt-5">
+        <button class="btn btn-outline-primary btn-lg" onclick="showMoreGyms()">
+          <i class="fas fa-plus me-2"></i>Show More Gyms
+        </button>
+      </div>
+      
+      <div class="row g-4 mt-4 d-none" id="moreGyms">
+        <% allGyms.forEach((gym, index) => { %>
+          <% if (!selectedCity || gym.city !== selectedCity) { %>
+            <div class="col-lg-4 col-md-6">
+              <div class="gym-card-modern d-flex flex-column">
+                <div class="gym-image-container">
+                  <img src="<%= gym.image %>" alt="<%= gym.name %>" class="gym-image">
+                  <div class="gym-badge">
+                    <i class="fas fa-star text-yellow"></i>
+                    <%= gym.rating %>
+                  </div>
+                  <div class="city-label position-absolute" style="top: 15px; left: 15px;">
+                    <span class="badge bg-primary"><%= gym.city %></span>
+                  </div>
+                </div>
+                <div class="gym-content d-flex flex-column">
+                  <h4 class="fw-bold mb-3"><%= gym.name %></h4>
+                  
+                  <!-- Location & Distance -->
+                  <div class="gym-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span><%= gym.location %></span>
+                  </div>
+                  <div class="gym-distance">
+                    <i class="fas fa-route"></i>
+                    <span><%= gym.distance %> away</span>
+                  </div>
+                  
+                  <!-- Rating -->
+                  <div class="gym-rating">
+                    <div class="stars">
+                      <% for(let i = 1; i <= 5; i++) { %>
+                        <i class="fas fa-star <%= i <= gym.rating ? 'text-warning' : 'text-muted' %>"></i>
+                      <% } %>
+                    </div>
+                    <span class="fw-semibold"><%= gym.rating %>/5</span>
+                  </div>
+                  
+                  <!-- Contact Information -->
+                  <div class="gym-contact">
+                    <div class="contact-item">
+                      <i class="fas fa-phone"></i>
+                      <a href="tel:<%= gym.phone %>" class="text-decoration-none"><%= gym.phone %></a>
+                    </div>
+                    <div class="contact-item">
+                      <i class="fas fa-envelope"></i>
+                      <a href="mailto:<%= gym.email %>" class="text-decoration-none"><%= gym.email %></a>
+                    </div>
+                  </div>
+                  
+                  <!-- Timings -->
+                  <div class="gym-timings">
+                    <h6 class="fw-bold mb-2"><i class="fas fa-clock me-2"></i>Timings</h6>
+                    <div class="timing-item">
+                      <span>Mon-Fri:</span>
+                      <span class="ms-auto"><%= gym.timings.weekdays %></span>
+                    </div>
+                    <div class="timing-item">
+                      <span>Saturday:</span>
+                      <span class="ms-auto"><%= gym.timings.saturday %></span>
+                    </div>
+                    <div class="timing-item">
+                      <span>Sunday:</span>
+                      <span class="ms-auto"><%= gym.timings.sunday %></span>
+                    </div>
+                  </div>
+                  
+                  <!-- Amenities -->
+                  <div class="gym-amenities">
+                    <h6 class="fw-bold mb-2">Amenities</h6>
+                    <% gym.amenities.slice(0, 4).forEach(amenity => { %>
+                      <span class="amenity-tag"><%= amenity %></span>
+                    <% }) %>
+                    <% if (gym.amenities.length > 4) { %>
+                      <span class="amenity-tag">+<%= gym.amenities.length - 4 %> more</span>
+                    <% } %>
+                  </div>
+                  
+                  <!-- Actions -->
+                  <div class="gym-actions mt-auto">
+                    <div class="d-grid gap-2">
+                      <a href="/gym/<%= gym.id %>" class="btn btn-outline-primary">
+                        <i class="fas fa-eye me-2"></i>View Details
+                      </a>
+                      <button class="btn btn-red-gradient" onclick="openEnquiryModal('<%= gym.id %>', '<%= gym.name %>')">
+                        <i class="fas fa-phone me-2"></i>Enquire Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- Enquiry Modal -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-white" id="enquiryModalLabel">
+          <i class="fas fa-phone me-2"></i>Enquire About Gym
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="gymEnquiryForm">
+          <input type="hidden" id="gymId" name="gymId">
+          <input type="hidden" name="source" value="gymPage">
+          
+          <div class="mb-3">
+            <label for="enquiryName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="enquiryName" name="name" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="enquiryEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="enquiryEmail" name="email" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="enquiryPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="enquiryPhone" name="phone" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="enquiryQuery" class="form-label">Your Query (Optional)</label>
+            <textarea class="form-control" id="enquiryQuery" name="query" rows="3" placeholder="Any specific questions about the gym..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-red-gradient" onclick="submitEnquiry()">
+          <i class="fas fa-paper-plane me-2"></i>Submit Enquiry
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showMoreGyms() {
+  document.getElementById('moreGyms').classList.remove('d-none');
+  event.target.style.display = 'none';
+}
+
+function openEnquiryModal(gymId, gymName) {
+  document.getElementById('gymId').value = gymId;
+  document.getElementById('enquiryModalLabel').innerHTML = `<i class="fas fa-phone me-2"></i>Enquire About ${gymName}`;
+  new bootstrap.Modal(document.getElementById('enquiryModal')).show();
+}
+
+function submitEnquiry() {
+  const form = document.getElementById('gymEnquiryForm');
+  const formData = new FormData(form);
+  
+  fetch('/leads', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      bootstrap.Modal.getInstance(document.getElementById('enquiryModal')).hide();
+      showNotification(data.message, 'success');
+      form.reset();
+    } else {
+      showNotification('Error submitting enquiry. Please try again.', 'error');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    showNotification('Error submitting enquiry. Please try again.', 'error');
+  });
+}
+</script>

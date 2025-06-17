@@ -1,0 +1,184 @@
+<% layout('layout') %>
+
+<!-- Page Header -->
+<section class="page-header text-white py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h1 class="display-4 fw-bold mb-3">Advanced Services</h1>
+        <p class="lead mb-0">Cutting-edge wellness and recovery services</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            <i class="fas fa-map-marker-alt me-2"></i>
+            <%= selectedCity || 'All Cities' %>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/services">All Cities</a></li>
+            <% if (typeof cities !== 'undefined') { %>
+              <% cities.forEach(city => { %>
+                <li><a class="dropdown-item" href="/services?city=<%= city.name %>"><%= city.name %></a></li>
+              <% }) %>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Advanced Services -->
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold mb-3">Premium Therapy Services</h2>
+      <p class="lead text-muted">Experience the latest in wellness and recovery technology</p>
+    </div>
+    
+    <!-- Current City Services -->
+    <% if (advancedServices && advancedServices.length > 0) { %>
+      <div class="row g-4" id="currentCityServices">
+        <% advancedServices.forEach((service, index) => { %>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-card h-100" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+              <img src="<%= service.image %>" alt="<%= service.name %>" class="service-image">
+              <div class="service-content">
+                <h4 class="fw-bold mb-3"><%= service.name %></h4>
+                <p class="text-muted mb-3"><%= service.description %></p>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="service-price"><%= service.price %></span>
+                  <span class="badge bg-primary"><%= service.city %></span>
+                </div>
+                <button class="btn btn-red-gradient w-100" onclick="openServiceEnquiry('<%= service.id %>', '<%= service.name %>')">
+                  <i class="fas fa-phone me-2"></i>Enquire Now
+                </button>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="text-center py-5">
+        <i class="fas fa-spa fs-1 text-muted mb-3"></i>
+        <h3 class="text-muted">No services found in <%= selectedCity || 'selected city' %></h3>
+        <p class="text-muted">Try selecting a different city or check back later.</p>
+      </div>
+    <% } %>
+    
+    <!-- Show More Section -->
+    <% if (typeof allServices !== 'undefined' && allServices.length > advancedServices.length) { %>
+      <div class="text-center mt-5">
+        <button class="btn btn-outline-primary btn-lg" onclick="showMoreServices()">
+          <i class="fas fa-plus me-2"></i>Show More Services
+        </button>
+      </div>
+      
+      <div class="row g-4 mt-4 d-none" id="moreServices">
+        <% allServices.forEach((service, index) => { %>
+          <% if (!selectedCity || service.city !== selectedCity) { %>
+            <div class="col-lg-4 col-md-6">
+              <div class="service-card h-100">
+                <img src="<%= service.image %>" alt="<%= service.name %>" class="service-image">
+                <div class="service-content">
+                  <h4 class="fw-bold mb-3"><%= service.name %></h4>
+                  <p class="text-muted mb-3"><%= service.description %></p>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="service-price"><%= service.price %></span>
+                    <span class="badge bg-primary"><%= service.city %></span>
+                  </div>
+                  <button class="btn btn-red-gradient w-100" onclick="openServiceEnquiry('<%= service.id %>', '<%= service.name %>')">
+                    <i class="fas fa-phone me-2"></i>Enquire Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- Service Enquiry Modal -->
+<div class="modal fade" id="serviceEnquiryModal" tabindex="-1" aria-labelledby="serviceEnquiryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-white" id="serviceEnquiryModalLabel">
+          <i class="fas fa-spa me-2"></i>Service Enquiry
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="serviceEnquiryForm">
+          <input type="hidden" id="serviceId" name="serviceId">
+          <input type="hidden" name="source" value="servicesPage">
+          
+          <div class="mb-3">
+            <label for="serviceName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="serviceName" name="name" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="serviceEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="serviceEmail" name="email" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="servicePhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="servicePhone" name="phone" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="serviceQuery" class="form-label">Your Query (Optional)</label>
+            <textarea class="form-control" id="serviceQuery" name="query" rows="3" placeholder="Any specific questions about the service..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-red-gradient" onclick="submitServiceEnquiry()">
+          <i class="fas fa-paper-plane me-2"></i>Submit Enquiry
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showMoreServices() {
+  document.getElementById('moreServices').classList.remove('d-none');
+  event.target.style.display = 'none';
+}
+
+function openServiceEnquiry(serviceId, serviceName) {
+  document.getElementById('serviceId').value = serviceId;
+  document.getElementById('serviceEnquiryModalLabel').innerHTML = `<i class="fas fa-spa me-2"></i>Enquiry for ${serviceName}`;
+  new bootstrap.Modal(document.getElementById('serviceEnquiryModal')).show();
+}
+
+function submitServiceEnquiry() {
+  const form = document.getElementById('serviceEnquiryForm');
+  const formData = new FormData(form);
+  
+  fetch('/leads', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      bootstrap.Modal.getInstance(document.getElementById('serviceEnquiryModal')).hide();
+      showNotification(data.message, 'success');
+      form.reset();
+    } else {
+      showNotification('Error submitting enquiry. Please try again.', 'error');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    showNotification('Error submitting enquiry. Please try again.', 'error');
+  });
+}
+</script>

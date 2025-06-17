@@ -1,0 +1,357 @@
+<% layout('layout') %>
+
+<!-- Trainer Profile Header -->
+<section class="trainer-profile-header py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-4">
+        <div class="trainer-profile-image text-center">
+          <img src="<%= trainer.image %>" alt="<%= trainer.name %>" class="img-fluid rounded-circle" style="width: 300px; height: 300px; object-fit: cover;">
+          <div class="trainer-rating-badge position-absolute" style="top: 20px; right: 20px;">
+            <i class="fas fa-star text-yellow"></i>
+            <%= trainer.rating %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="trainer-profile-info">
+          <h1 class="display-4 fw-bold mb-3"><%= trainer.name %></h1>
+          <h3 class="text-primary mb-3"><%= trainer.specialty %></h3>
+          <p class="lead text-muted mb-4"><%= trainer.bio %></p>
+          
+          <div class="trainer-stats row g-3 mb-4">
+            <div class="col-6 col-md-3">
+              <div class="stat-item text-center">
+                <h4 class="fw-bold text-primary mb-1"><%= trainer.experience %></h4>
+                <p class="text-muted small mb-0">Experience</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stat-item text-center">
+                <h4 class="fw-bold text-primary mb-1"><%= trainer.rating %></h4>
+                <p class="text-muted small mb-0">Rating</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stat-item text-center">
+                <h4 class="fw-bold text-primary mb-1">200+</h4>
+                <p class="text-muted small mb-0">Clients Trained</p>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stat-item text-center">
+                <h4 class="fw-bold text-primary mb-1">95%</h4>
+                <p class="text-muted small mb-0">Success Rate</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="trainer-actions d-flex flex-wrap gap-3">
+            <button class="btn btn-red-gradient btn-lg px-4" onclick="openTrainerContactModal()">
+              <i class="fas fa-phone me-2"></i>Request Callback
+            </button>
+            <span class="btn btn-outline-primary btn-lg disabled">
+              <i class="fas fa-rupee-sign me-1"></i><%= trainer.price %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trainer Details -->
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <!-- About -->
+        <div class="trainer-section mb-5">
+          <h3 class="fw-bold mb-4">About <%= trainer.name %></h3>
+          <p class="text-muted mb-4">
+            With <%= trainer.experience %> of dedicated experience in <%= trainer.specialty.toLowerCase() %>, I'm passionate about helping individuals transform their lives through fitness. My approach combines scientific training methodologies with personalized attention to ensure each client achieves their unique goals.
+          </p>
+          <p class="text-muted">
+            I believe that fitness is not just about physical transformation, but about building confidence, discipline, and a lifestyle that promotes overall well-being. Whether you're a beginner starting your fitness journey or an experienced athlete looking to break through plateaus, I'm here to guide and support you every step of the way.
+          </p>
+        </div>
+        
+        <!-- Specializations -->
+        <div class="trainer-section mb-5">
+          <h3 class="fw-bold mb-4">Specializations</h3>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="specialization-item d-flex align-items-center">
+                <i class="fas fa-dumbbell text-primary me-2"></i>
+                <span>Strength Training</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="specialization-item d-flex align-items-center">
+                <i class="fas fa-heartbeat text-primary me-2"></i>
+                <span>Cardiovascular Fitness</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="specialization-item d-flex align-items-center">
+                <i class="fas fa-running text-primary me-2"></i>
+                <span>HIIT Training</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="specialization-item d-flex align-items-center">
+                <i class="fas fa-apple-alt text-primary me-2"></i>
+                <span>Nutrition Guidance</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="specialization-item d-flex align-items-center">
+                <i class="fas fa-medal text-primary me-2"></i>
+                <span>Competition Prep</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="specialization-item d-flex align-items-center">
+                <i class="fas fa-balance-scale text-primary me-2"></i>
+                <span>Weight Management</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Certifications -->
+        <div class="trainer-section mb-5">
+          <h3 class="fw-bold mb-4">Certifications</h3>
+          <div class="certifications">
+            <% trainer.certifications.forEach(cert => { %>
+              <div class="certification-item mb-3 d-flex align-items-center">
+                <i class="fas fa-certificate text-primary me-3"></i>
+                <div>
+                  <h6 class="fw-bold mb-1"><%= cert %></h6>
+                  <p class="text-muted small mb-0">Certified Professional</p>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+        
+        <!-- Client Testimonials -->
+        <div class="trainer-section mb-5">
+          <h3 class="fw-bold mb-4">Client Testimonials</h3>
+          <div class="testimonials">
+            <div class="testimonial-item mb-4 p-3 bg-light rounded">
+              <div class="d-flex align-items-center mb-3">
+                <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100" 
+                     alt="Client" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="fw-bold mb-0">Rahul Sharma</h6>
+                  <div class="rating">
+                    <% for(let i = 1; i <= 5; i++) { %>
+                      <i class="fas fa-star text-yellow"></i>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+              <p class="text-muted">"Amazing trainer! Lost 15kg in 6 months with <%= trainer.name %>'s guidance. The personalized workout plans and nutrition advice made all the difference."</p>
+            </div>
+            
+            <div class="testimonial-item mb-4 p-3 bg-light rounded">
+              <div class="d-flex align-items-center mb-3">
+                <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=100" 
+                     alt="Client" class="rounded-circle me-3" width="50" height="50">
+                <div>
+                  <h6 class="fw-bold mb-0">Priya Patel</h6>
+                  <div class="rating">
+                    <% for(let i = 1; i <= 5; i++) { %>
+                      <i class="fas fa-star text-yellow"></i>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+              <p class="text-muted">"Professional, knowledgeable, and motivating. <%= trainer.name %> helped me build strength and confidence. Highly recommend!"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <div class="trainer-sidebar">
+          <!-- Contact Card -->
+          <div class="contact-form mb-4">
+            <h4 class="fw-bold mb-3">Get in Touch</h4>
+            <p class="text-muted mb-3">Interested in training with <%= trainer.name %>? Fill out the form below and we'll get back to you soon.</p>
+            
+            <form id="trainerContactForm">
+              <input type="hidden" name="trainerId" value="<%= trainer.id %>">
+              <input type="hidden" name="source" value="trainerProfile">
+              <input type="hidden" name="trainerName" value="<%= trainer.name %>">
+              
+              <div class="mb-3">
+                <label for="contactName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="contactName" name="name" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="contactEmail" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="contactEmail" name="email" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="contactPhone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="contactPhone" name="phone" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="contactQuery" class="form-label">Your Query</label>
+                <textarea class="form-control" id="contactQuery" name="query" rows="3" placeholder="Tell us about your fitness goals..." required></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-red-gradient w-100">
+                <i class="fas fa-paper-plane me-2"></i>Request Callback
+              </button>
+            </form>
+          </div>
+          
+          <!-- Session Types -->
+          <div class="session-types-card mb-4 p-3 bg-light rounded">
+            <h5 class="fw-bold mb-3">Session Types</h5>
+            <div class="session-type mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold mb-1">Personal Training</h6>
+                  <p class="text-muted small mb-0">1-on-1 session (60 min)</p>
+                </div>
+                <span class="fw-bold text-primary"><%= trainer.price %></span>
+              </div>
+            </div>
+            <div class="session-type mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold mb-1">Duo Training</h6>
+                  <p class="text-muted small mb-0">2-person session (60 min)</p>
+                </div>
+                <span class="fw-bold text-primary">₹3,500</span>
+              </div>
+            </div>
+            <div class="session-type mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="fw-bold mb-1">Group Session</h6>
+                  <p class="text-muted small mb-0">Small group (60 min)</p>
+                </div>
+                <span class="fw-bold text-primary">₹1,500/person</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Availability -->
+          <div class="availability-card p-3 bg-light rounded">
+            <h5 class="fw-bold mb-3">Availability</h5>
+            <div class="availability-schedule">
+              <div class="schedule-item mb-2 d-flex justify-content-between">
+                <span class="day fw-semibold">Monday - Friday</span>
+                <span class="time text-muted">6:00 AM - 10:00 PM</span>
+              </div>
+              <div class="schedule-item mb-2 d-flex justify-content-between">
+                <span class="day fw-semibold">Saturday</span>
+                <span class="time text-muted">7:00 AM - 8:00 PM</span>
+              </div>
+              <div class="schedule-item mb-2 d-flex justify-content-between">
+                <span class="day fw-semibold">Sunday</span>
+                <span class="time text-muted">8:00 AM - 6:00 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Modal -->
+<div class="modal fade" id="trainerContactModal" tabindex="-1" aria-labelledby="trainerContactModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-white" id="trainerContactModalLabel">
+          <i class="fas fa-phone me-2"></i>Contact <%= trainer.name %>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted mb-3">We'll connect you with <%= trainer.name %> for a consultation about your fitness goals.</p>
+        <form id="trainerModalForm">
+          <input type="hidden" name="trainerId" value="<%= trainer.id %>">
+          <input type="hidden" name="source" value="trainerProfileModal">
+          <input type="hidden" name="trainerName" value="<%= trainer.name %>">
+          
+          <div class="mb-3">
+            <label for="modalName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="modalName" name="name" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="modalEmail" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="modalEmail" name="email" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="modalPhone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="modalPhone" name="phone" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="modalQuery" class="form-label">Your Query</label>
+            <textarea class="form-control" id="modalQuery" name="query" rows="3" placeholder="Tell us about your fitness goals..." required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-red-gradient" onclick="submitTrainerContact('modal')">
+          <i class="fas fa-paper-plane me-2"></i>Request Callback
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openTrainerContactModal() {
+  new bootstrap.Modal(document.getElementById('trainerContactModal')).show();
+}
+
+// Handle form submission for both sidebar and modal forms
+document.getElementById('trainerContactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  submitTrainerContact('sidebar');
+});
+
+function submitTrainerContact(formType) {
+  const formId = formType === 'modal' ? 'trainerModalForm' : 'trainerContactForm';
+  const form = document.getElementById(formId);
+  const formData = new FormData(form);
+  
+  fetch('/leads', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      if (formType === 'modal') {
+        bootstrap.Modal.getInstance(document.getElementById('trainerContactModal')).hide();
+      }
+      showNotification(data.message, 'success');
+      form.reset();
+    } else {
+      showNotification('Error submitting request. Please try again.', 'error');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    showNotification('Error submitting request. Please try again.', 'error');
+  });
+}
+</script>

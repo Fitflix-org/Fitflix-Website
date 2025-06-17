@@ -1,0 +1,232 @@
+<% layout('layout') %>
+
+<!-- Page Header -->
+<section class="page-header bg-primary text-white py-5">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold mb-3">Contact Us</h1>
+    <p class="lead mb-0">Get in touch with our team for any questions or support</p>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Contact Form -->
+      <div class="col-lg-8">
+        <div class="contact-form">
+          <h3 class="fw-bold mb-4">Send us a Message</h3>
+          <form id="contactForm" class="needs-validation" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label fw-semibold">Full Name</label>
+                <input type="text" class="form-control" id="name" required>
+                <div class="invalid-feedback">Please provide your name.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label fw-semibold">Email Address</label>
+                <input type="email" class="form-control" id="email" required>
+                <div class="invalid-feedback">Please provide a valid email.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="phone" class="form-label fw-semibold">Phone Number</label>
+                <input type="tel" class="form-control" id="phone">
+              </div>
+              <div class="col-md-6">
+                <label for="subject" class="form-label fw-semibold">Subject</label>
+                <select class="form-select" id="subject" required>
+                  <option value="">Select Subject</option>
+                  <option value="membership">Membership Inquiry</option>
+                  <option value="booking">Booking Support</option>
+                  <option value="trainer">Trainer Information</option>
+                  <option value="technical">Technical Support</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="other">Other</option>
+                </select>
+                <div class="invalid-feedback">Please select a subject.</div>
+              </div>
+              <div class="col-12">
+                <label for="message" class="form-label fw-semibold">Message</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+                <div class="invalid-feedback">Please provide a message.</div>
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="newsletter">
+                  <label class="form-check-label" for="newsletter">
+                    Subscribe to our newsletter for fitness tips and updates
+                  </label>
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-lg px-5">
+                  <i class="fas fa-paper-plane me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Contact Information -->
+      <div class="col-lg-4">
+        <div class="contact-info">
+          <h3 class="fw-bold mb-4">Get in Touch</h3>
+          
+          <!-- Contact Details -->
+          <div class="contact-item mb-4">
+            <div class="d-flex align-items-start">
+              <div class="contact-icon me-3">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">Visit Us</h6>
+                <p class="text-muted mb-0">
+                  123 Fitness Street<br>
+                  Bandra West, Mumbai 400050<br>
+                  Maharashtra, India
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-item mb-4">
+            <div class="d-flex align-items-start">
+              <div class="contact-icon me-3">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">Call Us</h6>
+                <p class="text-muted mb-1">+91 9876543210</p>
+                <p class="text-muted mb-0">Mon-Sun: 6:00 AM - 10:00 PM</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-item mb-4">
+            <div class="d-flex align-items-start">
+              <div class="contact-icon me-3">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">Email Us</h6>
+                <p class="text-muted mb-1">hello@fitflix.com</p>
+                <p class="text-muted mb-0">support@fitflix.com</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Social Media -->
+          <div class="social-media mb-4">
+            <h6 class="fw-bold mb-3">Follow Us</h6>
+            <div class="social-links">
+              <a href="#" class="social-link me-3">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link me-3">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link me-3">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link me-3">
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="#" class="social-link me-3">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Operating Hours -->
+          <div class="operating-hours">
+            <h6 class="fw-bold mb-3">Operating Hours</h6>
+            <div class="hours-list">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Monday - Friday</span>
+                <span class="fw-semibold">6:00 AM - 10:00 PM</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Saturday</span>
+                <span class="fw-semibold">7:00 AM - 9:00 PM</span>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span class="text-muted">Sunday</span>
+                <span class="fw-semibold">8:00 AM - 8:00 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h3 class="fw-bold mb-3">Find Our Locations</h3>
+      <p class="text-muted">Visit any of our premium fitness centers across the city</p>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="location-card">
+          <h5 class="fw-bold mb-2">FitFlix Bandra</h5>
+          <p class="text-muted mb-2">
+            <i class="fas fa-map-marker-alt me-2"></i>
+            123 Fitness Street, Bandra West
+          </p>
+          <p class="text-muted mb-3">
+            <i class="fas fa-phone me-2"></i>
+            +91 9876543210
+          </p>
+          <div class="location-features">
+            <span class="badge bg-primary me-1">Swimming Pool</span>
+            <span class="badge bg-primary me-1">Spa</span>
+            <span class="badge bg-primary">Cafe</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6">
+        <div class="location-card">
+          <h5 class="fw-bold mb-2">FitFlix Andheri</h5>
+          <p class="text-muted mb-2">
+            <i class="fas fa-map-marker-alt me-2"></i>
+            456 Wellness Avenue, Andheri East
+          </p>
+          <p class="text-muted mb-3">
+            <i class="fas fa-phone me-2"></i>
+            +91 9876543211
+          </p>
+          <div class="location-features">
+            <span class="badge bg-primary me-1">Yoga Studio</span>
+            <span class="badge bg-primary me-1">CrossFit</span>
+            <span class="badge bg-primary">Parking</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6">
+        <div class="location-card">
+          <h5 class="fw-bold mb-2">FitFlix Powai</h5>
+          <p class="text-muted mb-2">
+            <i class="fas fa-map-marker-alt me-2"></i>
+            789 Health Hub, Powai
+          </p>
+          <p class="text-muted mb-3">
+            <i class="fas fa-phone me-2"></i>
+            +91 9876543212
+          </p>
+          <div class="location-features">
+            <span class="badge bg-primary me-1">24/7 Access</span>
+            <span class="badge bg-primary me-1">Sauna</span>
+            <span class="badge bg-primary">Juice Bar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

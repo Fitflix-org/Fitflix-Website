@@ -1,0 +1,182 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-lg">
+  <div class="container">
+    <!-- Logo with Image -->
+    <a class="navbar-brand fw-bold" href="/">
+      <img src="/fitflix_3.1.2_I.png" alt="FitFlix Logo" class="me-2">
+      <span class="fit-text">Fit</span><span class="flix-text">Flix</span>
+    </a>
+    
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Navigation Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/gyms">Find Gyms</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/trainers">Trainers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/services">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+      
+      <!-- City Selector & CTA -->
+      <div class="d-flex align-items-center">
+        <!-- City Selector -->
+        <div class="city-selector me-3">
+          <button class="btn btn-outline-primary city-selector-btn" type="button" data-bs-toggle="modal" data-bs-target="#cityModal">
+            <i class="fas fa-map-marker-alt me-2"></i>
+            <span class="city-name"><%= currentCity %></span>
+            <i class="fas fa-chevron-down ms-2"></i>
+          </button>
+        </div>
+        
+        <!-- CTA Button -->
+        <a href="/contact" class="btn btn-red-gradient px-4">
+          <i class="fas fa-phone me-1"></i>
+          Enquire Now
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- City Selection Modal -->
+<div class="modal fade" id="cityModal" tabindex="-1" aria-labelledby="cityModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold text-white" id="cityModalLabel">
+          <i class="fas fa-map-marker-alt me-2"></i>
+          Select Your City
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <!-- Mumbai -->
+          <div class="col-md-4 col-6">
+            <div class="city-option" onclick="selectCityFromModal('Mumbai')">
+              <div class="city-icon">
+                <svg viewBox="0 0 100 100" class="monument-svg">
+                  <!-- Gateway of India -->
+                  <rect x="20" y="60" width="60" height="30" fill="#8B4513"/>
+                  <rect x="25" y="40" width="50" height="20" fill="#A0522D"/>
+                  <rect x="30" y="20" width="40" height="20" fill="#CD853F"/>
+                  <circle cx="50" cy="15" r="8" fill="#DAA520"/>
+                  <rect x="35" y="50" width="30" height="15" fill="#654321"/>
+                </svg>
+              </div>
+              <h6 class="fw-bold mb-1">Mumbai</h6>
+              <p class="text-muted small mb-0">45 Gyms Available</p>
+            </div>
+          </div>
+          
+          <!-- Delhi -->
+          <div class="col-md-4 col-6">
+            <div class="city-option" onclick="selectCityFromModal('Delhi')">
+              <div class="city-icon">
+                <svg viewBox="0 0 100 100" class="monument-svg">
+                  <!-- India Gate -->
+                  <rect x="30" y="70" width="40" height="20" fill="#8B4513"/>
+                  <rect x="35" y="50" width="30" height="20" fill="#A0522D"/>
+                  <rect x="40" y="30" width="20" height="20" fill="#CD853F"/>
+                  <rect x="45" y="10" width="10" height="20" fill="#DAA520"/>
+                  <rect x="47" y="5" width="6" height="10" fill="#FFD700"/>
+                </svg>
+              </div>
+              <h6 class="fw-bold mb-1">Delhi</h6>
+              <p class="text-muted small mb-0">38 Gyms Available</p>
+            </div>
+          </div>
+          
+          <!-- Bangalore -->
+          <div class="col-md-4 col-6">
+            <div class="city-option" onclick="selectCityFromModal('Bangalore')">
+              <div class="city-icon">
+                <svg viewBox="0 0 100 100" class="monument-svg">
+                  <!-- Vidhana Soudha -->
+                  <rect x="20" y="60" width="60" height="30" fill="#8B4513"/>
+                  <rect x="25" y="40" width="50" height="20" fill="#A0522D"/>
+                  <circle cx="35" cy="30" r="8" fill="#DAA520"/>
+                  <circle cx="50" cy="25" r="10" fill="#FFD700"/>
+                  <circle cx="65" cy="30" r="8" fill="#DAA520"/>
+                </svg>
+              </div>
+              <h6 class="fw-bold mb-1">Bangalore</h6>
+              <p class="text-muted small mb-0">42 Gyms Available</p>
+            </div>
+          </div>
+          
+          <!-- Chennai -->
+          <div class="col-md-4 col-6">
+            <div class="city-option" onclick="selectCityFromModal('Chennai')">
+              <div class="city-icon">
+                <svg viewBox="0 0 100 100" class="monument-svg">
+                  <!-- Marina Beach Lighthouse -->
+                  <rect x="45" y="20" width="10" height="60" fill="#CD853F"/>
+                  <circle cx="50" cy="15" r="8" fill="#FFD700"/>
+                  <rect x="40" y="75" width="20" height="15" fill="#8B4513"/>
+                  <path d="M 30 85 Q 50 75 70 85" stroke="#4682B4" stroke-width="3" fill="none"/>
+                </svg>
+              </div>
+              <h6 class="fw-bold mb-1">Chennai</h6>
+              <p class="text-muted small mb-0">28 Gyms Available</p>
+            </div>
+          </div>
+          
+          <!-- Hyderabad -->
+          <div class="col-md-4 col-6">
+            <div class="city-option" onclick="selectCityFromModal('Hyderabad')">
+              <div class="city-icon">
+                <svg viewBox="0 0 100 100" class="monument-svg">
+                  <!-- Charminar -->
+                  <rect x="20" y="60" width="15" height="30" fill="#8B4513"/>
+                  <rect x="40" y="60" width="15" height="30" fill="#8B4513"/>
+                  <rect x="60" y="60" width="15" height="30" fill="#8B4513"/>
+                  <circle cx="27" cy="50" r="8" fill="#DAA520"/>
+                  <circle cx="47" cy="45" r="10" fill="#FFD700"/>
+                  <circle cx="67" cy="50" r="8" fill="#DAA520"/>
+                </svg>
+              </div>
+              <h6 class="fw-bold mb-1">Hyderabad</h6>
+              <p class="text-muted small mb-0">25 Gyms Available</p>
+            </div>
+          </div>
+          
+          <!-- Pune -->
+          <div class="col-md-4 col-6">
+            <div class="city-option" onclick="selectCityFromModal('Pune')">
+              <div class="city-icon">
+                <svg viewBox="0 0 100 100" class="monument-svg">
+                  <!-- Shaniwar Wada -->
+                  <rect x="25" y="50" width="50" height="40" fill="#8B4513"/>
+                  <rect x="30" y="30" width="40" height="20" fill="#A0522D"/>
+                  <rect x="35" y="20" width="30" height="10" fill="#CD853F"/>
+                  <rect x="45" y="10" width="10" height="10" fill="#DAA520"/>
+                </svg>
+              </div>
+              <h6 class="fw-bold mb-1">Pune</h6>
+              <p class="text-muted small mb-0">32 Gyms Available</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <p class="text-muted">More cities coming soon!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
