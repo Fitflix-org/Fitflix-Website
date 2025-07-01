@@ -164,49 +164,7 @@
   </div>
 </section>
 
-<!-- Stats Section -->
-<section class="py-5 bg-primary-gradient text-white">
-  <div class="container">
-    <div class="row g-4 text-center">
-      <div class="col-lg-3 col-md-6">
-        <div class="stat-item">
-          <div class="stat-icon mb-3">
-            <i class="fas fa-dumbbell"></i>
-          </div>
-          <h2 class="display-4 fw-bold mb-2 counter" data-target="500">0</h2>
-          <p class="lead mb-0">Premium Gyms</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="stat-item">
-          <div class="stat-icon mb-3">
-            <i class="fas fa-user-tie"></i>
-          </div>
-          <h2 class="display-4 fw-bold mb-2 counter" data-target="1000">0</h2>
-          <p class="lead mb-0">Expert Trainers</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="stat-item">
-          <div class="stat-icon mb-3">
-            <i class="fas fa-users"></i>
-          </div>
-          <h2 class="display-4 fw-bold mb-2 counter" data-target="50000">0</h2>
-          <p class="lead mb-0">Happy Members</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="stat-item">
-          <div class="stat-icon mb-3">
-            <i class="fas fa-city"></i>
-          </div>
-          <h2 class="display-4 fw-bold mb-2 counter" data-target="6">0</h2>
-          <p class="lead mb-0">Cities</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- Featured Gyms -->
 <section class="py-5 section-padding">
@@ -297,59 +255,7 @@
   </div>
 </section>
 
-<!-- Trainers Section -->
-<section class="py-5 section-padding">
-  <div class="container">
-    <div class="text-center mb-5 section-header">
-      <div class="section-badge mb-3">
-        <span class="badge bg-primary-gradient px-3 py-2">Expert Guidance</span>
-      </div>
-      <h2 class="display-4 fw-bold text-dark mb-3">Meet Our Trainers</h2>
-      <p class="lead text-muted">Train with certified experts who will help you achieve your goals</p>
-    </div>
-    
-    <div class="row g-4">
-      <% if (typeof featuredTrainers !== 'undefined') { %>
-        <% featuredTrainers.forEach((trainer, index) => { %>
-          <div class="col-lg-4 col-md-6">
-            <div class="trainer-card-modern" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
-              <div class="trainer-image-container">
-                <img src="<%= trainer.image %>" alt="<%= trainer.name %>" class="trainer-image">
-                <div class="trainer-overlay">
-                  <a href="/trainer/<%= trainer.id %>" class="btn btn-primary-gradient">View Profile</a>
-                </div>
-                <div class="trainer-rating-badge">
-                  <i class="fas fa-star text-yellow"></i>
-                  <%= trainer.rating %>
-                </div>
-              </div>
-              <div class="trainer-info">
-                <h4 class="fw-bold mb-2"><%= trainer.name %></h4>
-                <p class="text-primary mb-2 fw-semibold"><%= trainer.specialty %></p>
-                <p class="text-muted small mb-3">
-                  <i class="fas fa-briefcase me-1"></i>
-                  <%= trainer.experience %> experience
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="fw-bold text-primary"><%= trainer.price %></span>
-                  <a href="/contact" class="btn btn-outline-primary btn-sm">
-                    Contact
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% }) %>
-      <% } %>
-    </div>
-    
-    <div class="text-center mt-5">
-      <a href="/trainers" class="btn btn-outline-primary btn-lg px-5">
-        <i class="fas fa-users me-2"></i>View All Trainers
-      </a>
-    </div>
-  </div>
-</section>
+
 
 <!-- CTA Section -->
 <section class="cta-section py-5 bg-primary-gradient text-white">
